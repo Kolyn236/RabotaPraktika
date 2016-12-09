@@ -33,7 +33,6 @@ while($arListSect = $arListSec->Fetch())
 {
   $result[$arListSect['ID']] = $arListSect;
 }      
-$count=1;
 $arSelect = array("NAME","ID","IBLOCK_SECTION_ID","PREVIEW_TEXT");
 $arFilter = array("IBLOCK_ID" => $iblockID,"SECTION_ID" => array_keys($result));
 $arSort = array("IBLOCK_SECTION_ID" => "ASC");
@@ -41,9 +40,18 @@ $arGroupBy = false;
 $res = CIBlockElement::GetList($arSort,$arFilter,$arGroupBy,false, $arSelect);// Получаю нужные поля, сортирую
 while ($ob=$res->GetNext()) {
       $result[$ob['IBLOCK_SECTION_ID']]['ITEMS'][] = $ob;
-      
-}
 
+}
+foreach ($result as $arFullMess => $Mess) {
+	echo "<br><h2>{$Mess["ID"]}.{$Mess["NAME"]}</h2></br>";
+  foreach ($Mess as $key => $value) {
+  		$count=1;
+      foreach($value as $k => $v){
+      	echo "<br><h3>{$Mess['ID']}.{$count}{$v['NAME']}</h3></br>{$v['PREVIEW_TEXT']}";
+      	$count++;
+      }
+  }
+}
 
 //}
 //echo "<pre>";
