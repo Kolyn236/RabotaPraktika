@@ -43,20 +43,17 @@ while ($ob=$res->GetNext()) {
 
 }
 foreach ($result as $arFullMess => $Mess) {
-	echo "<br><h2>{$Mess["ID"]}.{$Mess["NAME"]}</h2></br>";
+  echo "<h2>{$Mess["ID"]}.{$Mess["NAME"]}</h2>";
   foreach ($Mess as $key => $value) {
-  		$count=1;
+      $count=1;
       foreach($value as $k => $v){
-      	echo "<br><h3>{$Mess['ID']}.{$count}{$v['NAME']}</h3></br>{$v['PREVIEW_TEXT']}";
-      	$count++;
+        echo "<h3>{$Mess['ID']}.{$count}{$v['NAME']}</h3></br>";
+        echo TruncateText($v['PREVIEW_TEXT'],200);
+        $count++;
       }
   }
 }
 
-//}
-//echo "<pre>";
-//print_r($result);
-//echo "</pre>";
 ?>
 
 <hr>
